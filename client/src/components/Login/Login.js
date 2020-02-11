@@ -28,26 +28,24 @@ const Login = () => {
           </div>
         </div>
         <div className="center-align">
-          
-            <button
-              class="btn waves-effect waves-light blue accent-2 btn-large"
-              type="submit"
-              name="action"
-            >
-              Login <i className="fas fa-sign-in-alt"></i>
-            </button>
-        
+          <button
+            class="btn waves-effect waves-light blue accent-2 btn-large"
+            type="submit"
+            name="action"
+          >
+            Login <i className="fas fa-sign-in-alt"></i>
+          </button>
 
           <h6>
             Don't have an account?{" "}
             <Link to="/signup">
-            <button
-              class="btn waves-effect waves-light blue accent-2 btn-large"
-              type="submit"
-              name="action"
-            >
-              Signup <i className="fas fa-user-plus"></i>
-            </button>
+              <button
+                class="btn waves-effect waves-light blue accent-2 "
+                type="submit"
+                name="action"
+              >
+                Signup <i className="fas fa-user-plus"></i>
+              </button>
             </Link>
           </h6>
         </div>

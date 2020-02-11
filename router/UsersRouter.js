@@ -12,7 +12,7 @@ router.post(
   "/signup",
   [
     check("email").isEmail({
-      require_display_name: true,
+      // require_display_name: true,
       domain_specific_validation: true
     }),
     check("name").isAlpha(),
@@ -21,12 +21,21 @@ router.post(
   (req, res, next) => {
     const error = validationResult(req);
 
-    console.log(error);
+    if (!error.isEmpty()) {
+      // not empty  -|> return response of the validation error
+
+      return res.json({
+        hasValidationError: true,
+        validationError: error.array()
+      });
+    } else {
+      next();
+    }
   },
   UserController.SignUp
 );
 
-// api/usere/login
+// api/user/login
 // POST
 // PUBLIC route
 router.post(
