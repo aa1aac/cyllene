@@ -42,10 +42,23 @@ router.post(
   "/login",
   [
     check("email").isEmail({
-      require_display_name: true,
+      // require_display_name: true,
       domain_specific_validation: true
     })
   ],
+  (req, res, next) => {
+    let error = validationResult(req);
+
+    if (!error.isEmpty()) {
+      // if error
+      return res.json({
+        hasValidationError: true,
+        validationError: error.array()
+      });
+    } else {
+      return next();
+    }
+  },
   UserController.Login
 );
 
