@@ -3,6 +3,8 @@ const { check, validationResult } = require("express-validator");
 
 const UserController = require("../controller/UserController");
 
+const isAuth = require("../middleware/isAuth");
+
 const router = express.Router();
 
 //  /api/user/signup
@@ -61,5 +63,11 @@ router.post(
   },
   UserController.Login
 );
+
+// /api/users/get-user
+//  GET
+// PRIVATE route
+
+router.get("/get-user", isAuth, UserController.getUser);
 
 module.exports = router;

@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./style/materialize.css";
 
 import M from "materialize-css/dist/js/materialize.min.js";
 
-import IndexPage from "./Pages/Index";
-import SignupPage from "./Pages/Signup";
+import UserState from "./context/user/UserState";
+import Routing from "./Routing";
 
 const App = () => {
   useEffect(() => {
@@ -14,14 +14,13 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <UserState>
       <Router>
         <Switch>
-          <Route path="/signup/" exact component={SignupPage} />
-          <Route path="/" exact component={IndexPage} />
+          <Routing />
         </Switch>
       </Router>
-    </div>
+    </UserState>
   );
 };
 

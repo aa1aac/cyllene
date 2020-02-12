@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 
 import Login from "../components/Login/Login";
-
-import "./styles/index.css";
+import UserContext from "../context/user/UserContext";
 
 const IndexPage = () => {
+  let userContext = useContext(UserContext);
+
+  useEffect(() => {
+    userContext.getUser();
+  }, []);
+
   return (
     <div id="index">
       <div className="row">

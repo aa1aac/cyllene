@@ -85,7 +85,14 @@ const Login = (req, res) => {
   });
 };
 
+const getUser = (req, res) => {
+  User.findById(req.userId, "-password -email").then(user => {
+    return res.json({ user, msg: "user successfully fetched" });
+  });
+};
+
 module.exports = {
   SignUp,
-  Login
+  Login,
+  getUser
 };

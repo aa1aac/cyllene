@@ -1,35 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import M from "materialize-css/dist/js/materialize.min.js"
+
+import UserContext from '../../context/user/UserContext'
+
 import "./Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
+  const userContext = useContext(UserContext)
+  
 
   const onLogin = async e => {
     e.preventDefault();
 
-    let res = await axios.post("/users/login", { email, password });
-
-    console.log(res.data);
-
-    if (res.data.hasValidationError) {
-      res.data.validationError.forEach(error => {
-        M.toast({
-          html: `${error.msg} : ${error.param}`,
-          classes: "red accent-3 rounded"
-        });
-      });
-    }
-
-    if (res.data.msg) {
-      M.toast({
-        html: res.data.msg,
-        classes: "green accent-3"
-      });
-    }
+    userContext.login(email,password)
   };
 
   return (

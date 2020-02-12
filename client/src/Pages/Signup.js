@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 
 import Signup from "../components/signup/Signup";
+import UserContext from "../context/user/UserContext";
 
 const SignupPage = () => {
+  let userContext = useContext(UserContext);
+
+  useEffect(() => {
+    userContext.getUser();
+  }, []);
+
+ 
   return (
     <div className="row">
       <div className="col l8 xl7 hide-on-small "></div>
