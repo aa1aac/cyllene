@@ -1,14 +1,9 @@
-import React, { useEffect, useContext } from "react";
+import React from "react";
 
 import Login from "../components/Login/Login";
-import UserContext from "../context/user/UserContext";
 
 const IndexPage = () => {
-  let userContext = useContext(UserContext);
-
-  useEffect(() => {
-    userContext.getUser();
-  }, []);
+  
 
   return (
     <div id="index">

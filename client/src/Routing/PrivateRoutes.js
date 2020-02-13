@@ -1,25 +1,20 @@
-import React, { useContext } from "react";
+import React from "react";
 
-import UserContext from "../context/user/UserContext";
-import PrivateRoute from './PrivateRouteComponent'
+import PrivateRoute from "./PrivateRouteComponent";
 
+import Home from "../Pages/Home";
+import DashBoard from "../Pages/Dashboard";
+
+import Navbar from "../components/Navbar/Navbar";
 
 const PrivateRoutes = () => {
-  const userContext = useContext(UserContext);
-  
   return (
-      <div> 
-  {
-    userContext.isLoggedIn ? (
-      <div>
-        Navbar
-        {/* other routes go here */}
-      </div>
-    ) : null
-  }
-      </div>
-  )
-
+    <div>
+      <Navbar />
+      <PrivateRoute to="/home" exact component={Home} />
+      <PrivateRoute to="/dashboard" exact component={DashBoard} />
+    </div>
+  );
 };
 
 export default PrivateRoutes;

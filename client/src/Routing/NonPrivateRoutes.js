@@ -3,7 +3,7 @@ import React from "react";
 import NonPrivateRoute from "./NonPrivateRouteComponent";
 
 import SignupPage from "../Pages/Signup";
-import IndexPage from "../Pages/Signup";
+import IndexPage from "../Pages/Index";
 
 const NonPrivateRoutes = () => {
   return (

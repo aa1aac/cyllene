@@ -59,7 +59,7 @@ const Signup = () => {
               <input
                 type="text"
                 id="name"
-                className="autocomplete white-text"
+                className="autocomplete"
                 value={name}
                 onChange={e => setName(e.target.value)}
                 required
@@ -71,7 +71,7 @@ const Signup = () => {
               <input
                 type="email"
                 id="email"
-                className="autocomplete white-text"
+                className="autocomplete "
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 required
@@ -83,7 +83,7 @@ const Signup = () => {
               <input
                 type="password"
                 id="password"
-                className="autocomplete white-text"
+                className="autocomplete "
                 minLength="8"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
@@ -96,7 +96,7 @@ const Signup = () => {
               <input
                 type="password"
                 id="confirm"
-                className="autocomplete white-text"
+                className="autocomplete "
                 minLength="8"
                 value={confirm}
                 onChange={e => setConfirm(e.target.value)}

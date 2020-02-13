@@ -51,6 +51,18 @@ const UserState = props => {
     }
   };
 
+  const logout = async () => {
+
+    console.log(document.cookie);
+    
+    
+    document.cookie= `token=' ; Expires=${Date.now()}' `;
+
+    console.log(document.cookie)
+
+    dispatch({type:LOGOUT})
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -58,7 +70,8 @@ const UserState = props => {
         name: state.name,
         isLoggedIn: state.isLoggedIn,
         login,
-        getUser
+        getUser,
+        logout
       }}
     >
       {props.children}

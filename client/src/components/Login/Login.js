@@ -1,21 +1,20 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import UserContext from '../../context/user/UserContext'
+import UserContext from "../../context/user/UserContext";
 
 import "./Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
-  const userContext = useContext(UserContext)
-  
+
+  const userContext = useContext(UserContext);
 
   const onLogin = async e => {
     e.preventDefault();
 
-    userContext.login(email,password)
+    userContext.login(email, password);
   };
 
   return (
@@ -34,7 +33,7 @@ const Login = () => {
               <input
                 type="email"
                 id="email"
-                className="autocomplete white-text"
+                className="autocomplete "
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 required
@@ -46,7 +45,7 @@ const Login = () => {
               <input
                 type="password"
                 id="password"
-                className="autocomplete white-text"
+                className="autocomplete "
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 required
