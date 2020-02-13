@@ -19,8 +19,6 @@ const UserState = props => {
   const login = async (email, password) => {
     let res = await axios.post("/users/login", { email, password });
 
-    console.log(res.data.user);
-
     if (res.data.hasValidationError) {
       res.data.validationError.forEach(error => {
         M.toast({
@@ -52,15 +50,9 @@ const UserState = props => {
   };
 
   const logout = async () => {
+    document.cookie = `token= ; Expires=${Date.now()} `;
 
-    console.log(document.cookie);
-    
-    
-    document.cookie= `token=' ; Expires=${Date.now()}' `;
-
-    console.log(document.cookie)
-
-    dispatch({type:LOGOUT})
+    dispatch({ type: LOGOUT });
   };
 
   return (

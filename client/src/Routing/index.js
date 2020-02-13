@@ -12,8 +12,7 @@ const Routing = () => {
     userContext.getUser();
 
     M.AutoInit();
-    
-  }, []);
+  }, [userContext._id]);
 
   return (
     <div>

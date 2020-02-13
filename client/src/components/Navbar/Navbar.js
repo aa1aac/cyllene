@@ -13,8 +13,8 @@ const Navbar = props => {
   };
 
   useEffect(() => {
-    // M.AutoInit();
-  }, []);
+    M.AutoInit();
+  }, []);   
 
   if (userContext.isLoggedIn) {
     return (
@@ -24,7 +24,7 @@ const Navbar = props => {
             <Link to="/home" className="brand-logo">
               <i className="fab fa-cuttlefish"> Cyllene</i>
             </Link>
-            <a href="#" data-target="mobile" className="sidenav-trigger">
+            <a href="#!" data-target="mobile" className="sidenav-trigger">
               <i className="fas fa-ellipsis-v"></i>
             </a>
             <ul className="right hide-on-med-and-down">
@@ -35,7 +35,7 @@ const Navbar = props => {
                 <Link to="/home">Home</Link>
               </li>
               <li>
-                <a href="#" onClick={onClickLogout}>
+                <a href="#!" onClick={onClickLogout}>
                   Logout
                 </a>
               </li>
@@ -59,7 +59,7 @@ const Navbar = props => {
             <Link to="/home">Home</Link>
           </li>
           <li>
-            <a href="#" onClick={onClickLogout}>
+            <a href="#!" onClick={onClickLogout}>
               Logout
             </a>
           </li>
