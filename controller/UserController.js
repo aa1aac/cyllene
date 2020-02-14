@@ -1,4 +1,4 @@
-const User = require("../models/Users");
+const Users = require("../models/Users");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -14,7 +14,7 @@ const SignUp = (req, res) => {
       validationError: [{ msg: "passwords do not match", param: " " }]
     });
   // check existing user
-  User.findOne({ email }).then(existingUser => {
+  Users.findOne({ email }).then(existingUser => {
     // if existing return exisitng
     if (existingUser)
       return res.json({
@@ -24,7 +24,7 @@ const SignUp = (req, res) => {
 
     // else create the user
 
-    const user = new User({ name, email, password });
+    const user = new Users({ name, email, password });
 
     bcrypt.genSalt(10, (error, salt) => {
       bcrypt.hash(user.password, salt, (err, hash) => {
@@ -44,7 +44,7 @@ const SignUp = (req, res) => {
 const Login = (req, res) => {
   let { email, password } = req.body;
 
-  User.findOne({ email }).then(user => {
+  Users.findOne({ email }).then(user => {
     if (!user)
       return res.json({
         hasValidationError: true,
@@ -86,7 +86,7 @@ const Login = (req, res) => {
 };
 
 const getUser = (req, res) => {
-  User.findById(req.userId, "-password -email").then(user => {
+  Users.findById(req.userId, "-password -email").then(user => {
     return res.json({ user, msg: "user successfully fetched" });
   });
 };
