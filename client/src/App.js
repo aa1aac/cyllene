@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch } from "react-router-dom";
 import M from "materialize-css/dist/js/materialize.min.js";
 
 import "./style/materialize.css";
+import "./Pages/styles/index.css";
 
 import UserState from "./context/user/UserState";
 import QAState from "./context/QA/QAState";
@@ -17,13 +18,13 @@ const App = () => {
 
   return (
     <UserState>
-    <QAState>
-      <Router>
-        <Navbar />
-        <Switch>
-          <Routing />
-        </Switch>
-      </Router>
+      <QAState>
+        <Router>
+          <Navbar />
+          <Switch>
+            <Routing />
+          </Switch>
+        </Router>
       </QAState>
     </UserState>
   );
