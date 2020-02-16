@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 
 const { MONGO_URI } = require("./config");
 const UserRouter = require("./router/UsersRouter");
-const QuestionsRouter = require("./router/QuestionsRouter");
+const QARouter = require("./router/QARouter"); // router for question and answers
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(cookieParser()); // midlleware for parsing cookie
 
 // routing middleware
 app.use("/api/users", UserRouter);
-app.use("/api/questions", QuestionsRouter);
+app.use("/api/questions", QARouter);
 
 if (process.env.NODE_ENV === "production") {
   app.get("*", (req, res) => {

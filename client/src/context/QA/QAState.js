@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
 import axios from "axios";
+import M from "materialize-css/dist/js/materialize.min.js";
 
 import QAReducer from "./QAReducer";
 import QAContext from "./QAContext";
@@ -18,11 +19,17 @@ const QAState = props => {
 
   // post question
   const postQuestion = async (question, elaboration) => {
-    let res = await axios.post("/questions/", { question, elaboration });
+    try {
+      let res = await axios.post("/questions/", { question, elaboration });
 
-    // redirect the user to the dashboard todo
-    console.log(res.data);
-    // dispatch({ type: POST_QUESTION, payload: res.data.question });
+      // redirect the user to the dashboard todo
+      console.log(res.data);
+
+      M.toast({
+        html: "successfully posted the question",
+        classes: "rounded green"
+      });
+    } catch (error) {}
   };
 
   // get dashboard question
@@ -41,6 +48,23 @@ const QAState = props => {
     dispatch({ type: GET_HOME_QUESTIONS, payload: res.data.questions });
   };
 
+  const postAnswer = async (questionId, answer) => {
+    try {
+      let res = await axios.post(`/questions/${questionId}/answer`, {
+        answer
+      });
+
+      if (res.data.msg)
+        M.toast({ html: res.data.msg, classes: "green rounded" });
+
+      if (res.data.error)
+        M.toast({ html: res.data.error, classes: "red rounded" });
+    } catch (error) {
+      console.log(error);
+      M.toast({ html: "some error occured", classes: "red rounded" });
+    }
+  };
+
   return (
     <QAContext.Provider
       value={{
@@ -49,7 +73,8 @@ const QAState = props => {
         dashboardAnswered: state.dashboardAnswered,
         postQuestion,
         getDashboardQuestions,
-        getHomeQuestions
+        getHomeQuestions,
+        postAnswer
       }}
     >
       {props.children}

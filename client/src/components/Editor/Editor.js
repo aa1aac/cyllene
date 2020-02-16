@@ -6,6 +6,7 @@ import "./editorStyles.css";
 import "draft-js-side-toolbar-plugin/lib/plugin.css";
 import M from "materialize-css/dist/js/materialize.min.js";
 import QAContext from "../../context/QA/QAContext";
+import { withRouter } from "react-router-dom";
 
 const sideToolbarPlugin = createSideToolbarPlugin();
 const { SideToolbar } = sideToolbarPlugin;
@@ -27,7 +28,7 @@ class CustomEditor extends Component {
     this.editor.focus();
   };
 
-  onSubmit = () => {
+  onSubmit = async () => {
     let contentState = this.state.editorState.getCurrentContent();
     let converted = convertToRaw(contentState);
 
@@ -37,8 +38,13 @@ class CustomEditor extends Component {
         // check whether question is present
         if (this.props.question.trim()) {
           // move to send the request
+          try {
+            this.context.postQuestion(this.props.question, converted);
 
-          this.context.postQuestion(this.props.question, converted);
+            this.props.history.push("/dashboard");
+          } catch (error) {
+            console.log(error);
+          }
         } else {
           M.toast({
             html: "none of the fields can be empty",
@@ -50,6 +56,17 @@ class CustomEditor extends Component {
       // post answer if addAnswer:true
       if (this.props.addAnswer) {
         // move to send the request
+        try {
+          this.context.postAnswer(this.props.questionId, converted);
+
+          this.props.history.push("/dashboard");
+
+         
+
+        
+        } catch (error) {
+          console.log(error);
+        }
       }
     } else {
       M.toast({ html: "field cannot be empty", classes: "red rounded" });
@@ -57,6 +74,7 @@ class CustomEditor extends Component {
   };
 
   render() {
+    
     return (
       <div>
         <div className="editor" onClick={this.focus}>
@@ -80,4 +98,4 @@ class CustomEditor extends Component {
 
 CustomEditor.contextType = QAContext;
 
-export default CustomEditor;
+export default withRouter(CustomEditor);

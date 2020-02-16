@@ -14,7 +14,7 @@ const Navbar = props => {
 
   useEffect(() => {
     M.AutoInit();
-  }, []);   
+  }, []);
 
   if (userContext.isLoggedIn) {
     return (
@@ -33,6 +33,9 @@ const Navbar = props => {
               </li>
               <li>
                 <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <Link to="/dashboard/search">Search</Link>
               </li>
               <li>
                 <a href="#!" onClick={onClickLogout}>
@@ -54,6 +57,9 @@ const Navbar = props => {
           </h4>
           <li>
             <Link to="/dashboard">Dashboard</Link>
+          </li>
+          <li>
+            <Link to="/dashboard/search">Search</Link>
           </li>
           <li>
             <Link to="/home">Home</Link>
