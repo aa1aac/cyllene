@@ -2,11 +2,13 @@ import React from "react";
 
 import PrivateRoute from "./PrivateRouteComponent";
 
+
 import Home from "../Pages/Home";
 import DashBoard from "../Pages/Dashboard";
 import AddQn from "../Pages/AddQn";
 import ViewPage from "../Pages/View";
 import SearchPage from "../Pages/Search";
+
 
 const PrivateRoutes = () => {
   return (

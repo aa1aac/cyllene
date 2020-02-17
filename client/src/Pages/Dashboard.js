@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from "react";
+import debounce from "lodash.debounce";
 
 import { Link } from "react-router-dom";
 
@@ -11,18 +12,24 @@ const Dashboard = () => {
     qaContext.getDashboardQuestions();
   }, []);
 
-  console.log(qaContext.dashboardQuestions);
+  window.onscroll = debounce(() => {
+    // Bails early if:
+    // * there's nothing left to load
+    if (!qaContext.dashboardHasMore) return;
+
+    // Checks that the page has scrolled to the bottom
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      // load more content
+      qaContext.getMoreDashboardQuestions(qaContext.dashboardQuestions.length);
+    }
+  }, 100);
+
   return (
     <div className="container">
       <h4 className="blue-text center-align">Dashboard</h4>
-
-      {/* for future use while displaying answer */}
-      {/* <nav class="row center-align white black-text">
-        <ul>
-          <li class="col s6 active">Questioned</li>
-          <li class="col s6">Answered</li>
-        </ul>
-      </nav> */}
 
       {qaContext.dashboardQuestions ? (
         qaContext.dashboardQuestions.map(dashbardQuestion => {

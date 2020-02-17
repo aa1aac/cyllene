@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import M from "materialize-css/dist/js/materialize.min.js";
+import { Link } from "react-router-dom";
 
 const Search = () => {
   const [searchText, setSearchText] = useState("");
@@ -15,7 +16,7 @@ const Search = () => {
 
       let res = await axios.post("/questions/search", { search: searchText });
 
-      console.log(res.data);
+      
       if (res.data.error) {
         M.toast({ html: "no such result found", classes: "rounded red" });
         setLoading(false);
@@ -48,9 +49,34 @@ const Search = () => {
             </div>
           </form>
 
-          {searchResult.length ? (
-            <div className="black-text">has result</div>
-          ) : null}
+          {searchResult.length
+            ? searchResult.map(singleResult => {
+                return (
+                  <div className="row" key={singleResult._id}>
+                    <div className="col s12">
+                      <div className="card black-text">
+                        <div className="card-content">
+                          <h5>{singleResult.question}</h5>
+                          <br />
+                          <hr className="blue-text" />
+                          <em>
+                           asked by : <b>{singleResult._author.name}</b>
+                          </em>
+                        </div>
+                        <div className="card-action">
+                          <Link
+                            to={`/view/questions/${singleResult._id}`}
+                            className="blue-text"
+                          >
+                            View
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            : null}
 
           {loading ? (
             <div className="container center-align">

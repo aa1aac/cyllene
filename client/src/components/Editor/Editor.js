@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import Editor, { createEditorStateWithText } from "draft-js-plugins-editor";
 import { convertToRaw } from "draft-js";
 import createSideToolbarPlugin from "draft-js-side-toolbar-plugin";

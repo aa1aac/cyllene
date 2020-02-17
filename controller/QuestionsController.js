@@ -26,9 +26,14 @@ const getHomeQuestions = (req, res) => {
     .skip(skip)
     .populate("_author", "name")
     .then(questions => {
-      if (!questions) return res.json({ msg: "no more questions" });
+      if (!questions)
+        return res.json({
+          msg: "no more questions",
+          hasMore: false,
+          questions
+        });
 
-      return res.json({ questions, msg: "fetched questions" });
+      return res.json({ questions, msg: "fetched questions", hasMore: true });
     });
 };
 
@@ -41,9 +46,14 @@ const getDashboardQuestions = (req, res) => {
     .skip(skip)
     .populate("_author", "name")
     .then(questions => {
-      if (!questions) return res.json({ msg: "no more questions" });
+      if (!questions)
+        return res.json({ msg: "no more questions", hasMore: false });
 
-      return res.json({ questions, msg: "fetched dashboard questions" });
+      return res.json({
+        questions,
+        msg: "fetched dashboard questions",
+        hasMore: true
+      });
     });
 };
 
@@ -91,6 +101,7 @@ const searchQuestion = (req, res) => {
     },
     "-elaboration -_answers -date"
   )
+    .limit(5)
     .populate("_author", "name")
     .then(questions => {
       if (!questions.length)

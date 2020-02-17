@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import debounce from "lodash.debounce";
 
 import QAContext from "../context/QA/QAContext";
 
@@ -9,6 +10,22 @@ const Home = () => {
   useEffect(() => {
     qaContext.getHomeQuestions();
   }, []);
+
+  window.onscroll = debounce(() => {
+    // Bails early if:
+    // * there's nothing left to load
+
+    if (!qaContext.homeHasMore) return;
+
+    // Checks that the page has scrolled to the bottom
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      // load more content
+      qaContext.getMoreHomeQuestions(qaContext.homeQuestions.length);
+    }
+  }, 100);
 
   return (
     <div className="container">

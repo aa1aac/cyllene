@@ -21,10 +21,7 @@ const Login = () => {
     <div className="login">
       <h4 className="center blue-text text-accent-3">Login</h4>
 
-      <h6>
-        login with
-        {/* todo */}
-      </h6>
+     
 
       <form className="row m2" onSubmit={onLogin}>
         <div className="col s12">

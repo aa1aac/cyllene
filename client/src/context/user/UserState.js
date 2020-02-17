@@ -50,7 +50,7 @@ const UserState = props => {
   };
 
   const logout = async () => {
-    document.cookie = `token= ; Expires=${Date.now()} `;
+    document.cookie = `token= ; path='/'; Expires=${Date.now()} `;
 
     dispatch({ type: LOGOUT });
   };
